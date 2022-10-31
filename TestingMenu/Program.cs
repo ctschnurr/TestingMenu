@@ -13,13 +13,15 @@ namespace Loops
 
         static int newChoice;
         static string playerChose;
-
-        static int maxX = 60;
-        static int maxY = 20;
         static void Main(string[] args)
         {
             gameOver = false;
             string[] options = { "Main", "Forest", "Castle" };
+
+            Console.WriteLine("Welcome to Town");
+            Console.WriteLine("Please make a choice:");
+            Console.WriteLine("");
+            Console.WriteLine("");
 
             newChoice = Choice(true, options);
             playerChose = options[newChoice];
@@ -36,10 +38,10 @@ namespace Loops
         }
         public static int Choice(bool canCancel, params string[] options)
         {
-            const int startX = 1;
-            const int startY = 1;
+
+            int startX = Console.CursorLeft;
+            int startY = Console.CursorTop;
             const int optionsPerLine = 1;
-            const int spacingPerLine = 14;
 
             int currentSelection = 0;
 
@@ -49,16 +51,15 @@ namespace Loops
 
             do
             {
-                Console.Clear();
+                // Console.Clear();
+                Console.SetCursorPosition(startX, startY);
 
                 for (int i = 0; i < options.Length; i++)
                 {
-                    Console.SetCursorPosition(startX + (i % optionsPerLine) * spacingPerLine, startY + i / optionsPerLine);
-
                     if (i == currentSelection)
                         Console.BackgroundColor = ConsoleColor.Blue;
 
-                    Console.Write(options[i]);
+                    Console.WriteLine(" " + options[i]);
 
                     Console.ResetColor();
                 }
