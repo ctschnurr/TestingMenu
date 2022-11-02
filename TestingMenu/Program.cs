@@ -8,15 +8,11 @@ namespace Loops
 {
     internal class Program
     {
-
-        static bool gameOver;
-
         static int newChoice;
         static string playerChose;
         static void Main(string[] args)
         {
-            gameOver = false;
-            string[] options = { "Main", "Forest", "Castle" };
+            string[] options = { "Village", "Castle", "Forest" };
 
             Console.WriteLine("Welcome to Town");
             Console.WriteLine("Please make a choice:");
@@ -24,22 +20,25 @@ namespace Loops
             Console.WriteLine("");
 
             newChoice = Choice(true, options);
-            playerChose = options[newChoice];
+            if (newChoice == -1)
+            {
+                playerChose = "nothing";
+            }
+            else
+            {
+                playerChose = options[newChoice];
+            }
             Console.Clear();
 
             Console.WriteLine("");
             Console.WriteLine("Player chose " + playerChose);
             Console.ReadKey(true);
 
-            while (gameOver == false)
-            {
-
-            }
         }
         public static int Choice(bool canCancel, params string[] options)
         {
 
-            int startX = Console.CursorLeft;
+            int startX = (Console.CursorLeft + 1);
             int startY = Console.CursorTop;
             const int optionsPerLine = 1;
 
@@ -51,15 +50,18 @@ namespace Loops
 
             do
             {
-                // Console.Clear();
                 Console.SetCursorPosition(startX, startY);
 
                 for (int i = 0; i < options.Length; i++)
                 {
                     if (i == currentSelection)
+                    {
                         Console.BackgroundColor = ConsoleColor.Blue;
+                    }
 
-                    Console.WriteLine(" " + options[i]);
+                    Console.WriteLine(" " + options[i] + " ");
+
+                    Console.SetCursorPosition(startX, Console.CursorTop);
 
                     Console.ResetColor();
                 }
