@@ -14,10 +14,16 @@ namespace Loops
         {
             string[] options = { "Village", "Castle", "Forest" };
 
-            Console.WriteLine("Welcome to Town");
-            Console.WriteLine("Please make a choice:");
-            Console.WriteLine("");
-            Console.WriteLine("");
+            int origWidth;
+            int origHeight;
+
+            origWidth = Console.WindowWidth;
+            origHeight = Console.WindowHeight;
+
+            Console.SetWindowSize(120, 40);
+            Console.BufferHeight = Console.WindowHeight;
+
+            GameFrame();
 
             newChoice = Choice(true, options);
             if (newChoice == -1)
@@ -38,8 +44,8 @@ namespace Loops
         public static int Choice(bool canCancel, params string[] options)
         {
 
-            int startX = (Console.CursorLeft + 1);
-            int startY = Console.CursorTop;
+            int startX = 3; // (Console.CursorLeft + 1);
+            int startY = 33; // Console.CursorTop;
             const int optionsPerLine = 1;
 
             int currentSelection = 0;
@@ -106,6 +112,69 @@ namespace Loops
             Console.CursorVisible = true;
 
             return currentSelection;
+        }
+
+        static void GameFrame()
+        {
+            Console.SetCursorPosition(1, 1);
+
+            // Console.Write("│┤╡╢←╕╣║╗╝╜╛┐╚╔╩╦╠═╬╧╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄");╟╞╟╞┼──
+            
+            Console.Write("╔");
+            
+            for(int i = 0; i < 117; i++)
+            {
+                Console.Write("═");
+            }
+
+            Console.WriteLine("╗");
+
+            for(int i = 2; i < 31; i++)
+            {
+                Console.SetCursorPosition(1, i);
+                Console.Write("║");
+
+                for(int x = 0; x < 117; x++)
+                {
+                    Console.Write(" ");
+                }
+
+                Console.Write("║");
+            }
+
+            Console.SetCursorPosition(1, Console.CursorTop);
+            Console.Write("╟");
+
+            for (int i = 0; i < 117; i++)
+            {
+                Console.Write("─");
+            }
+
+            Console.Write("╢");
+
+            for (int i = 32; i < 37; i++)
+            {
+                Console.SetCursorPosition(1, i);
+                Console.Write("║");
+
+                for (int x = 0; x < 117; x++)
+                {
+                    Console.Write(" ");
+                }
+
+                Console.Write("║");
+            }
+
+
+            Console.SetCursorPosition(1, Console.CursorTop);
+            Console.Write("╚");
+
+            for (int i = 0; i < 117; i++)
+            {
+                Console.Write("═");
+            }
+
+            Console.WriteLine("╝");
         }
     }
 }
